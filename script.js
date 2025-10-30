@@ -24,7 +24,7 @@ function startGame(letter) {
   var guessedLetter = letter;
   var isInWord = chosenWord.includes(guessedLetter);
   var maskedWord = "";
-  console.log(`You pressed: ${guessedLetter}`);
+  // console.log(`You pressed: ${guessedLetter}`);
 
   if (isInWord) {
       console.log(`Your letter ${guessedLetter} is in the word`);
@@ -42,22 +42,14 @@ function startGame(letter) {
   guessedLetters.push(guessedLetter);
   console.log (`Letters guessed so far: ${guessedLetters}`);
   attempts --;
-  if (attempts === 0) {
+
+  if (maskedWordArray.indexOf("_ ") === -1){
+    console.log(`You got it! The word was ${chosenWord}`)
+  } else if (attempts === 0) {
     console.log(`No more attempts remaining. The word was ${chosenWord}`);
   } else {
-    console.log(`Attempts remaining: ${attempts}`);
+    console.log(`Attempts remaining: ${attempts}. GUESS SOME MORE!`);
   }
-  
-      
-    //cycle through chars array and check
-    //if each letter is in the guessedLetters array
-    //if not, replace with '_'
-    //----(do we need to do all loops each time? or save the masked word and only check for where we need to put current letter?) <-------DO IT THIS WAY
-    //NOTE: 
-    //update attempts
-    //update guessedLetters:   guessedLetters.push(letter);
-    //update masked word
-    //return masked word
 
   // TODO:
   // 1️⃣ Build a masked string using underscores for letters not yet guessed.
