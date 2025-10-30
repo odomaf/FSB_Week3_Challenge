@@ -6,7 +6,7 @@ var words = ["javascript", "array", "loop", "variable"];
 // Randomly select one word from the list
 var chosenWord = words[Math.floor(Math.random() * words.length)];
 var chosenWordCharsArray = chosenWord.split('');
-var maskedWordArray = "";
+var maskedWordArray = [];
 
 // Track guessed letters and remaining attempts
 var guessedLetters = [];
@@ -16,21 +16,39 @@ var attempts = 10;
 console.log("Chosen word:", chosenWord);
 
 for (i=0; i<chosenWordCharsArray.length; i++) {
-  maskedWordArray.push("_");
+  maskedWordArray.push("_ ");
 }
 
 // 🎮 Function students will build next
 function startGame(letter) {
   var guessedLetter = letter;
-  var isInWord = chosenWord.includes(guessedletter);
+  var isInWord = chosenWord.includes(guessedLetter);
+  var maskedWord = "";
   console.log(`You pressed: ${guessedLetter}`);
 
   if (isInWord) {
       console.log(`Your letter ${guessedLetter} is in the word`);
-      var indeces = [];
       for (i=0; i<chosenWordCharsArray.length; i++) {
-        
+        if (chosenWordCharsArray[i] === guessedLetter) {
+          maskedWordArray[i] = guessedLetter;
+        }
       }
+      maskedWord = maskedWordArray.join('');
+      console.log(`${maskedWord}`);
+  } else {
+      console.log(`Your letter ${guessedLetter} is not in the word. Guess a new letter`);
+  }
+  
+  guessedLetters.push(guessedLetter);
+  console.log (`Letters guessed so far: ${guessedLetters}`);
+  attempts --;
+  if (attempts === 0) {
+    console.log(`No more attempts remaining. The word was ${chosenWord}`);
+  } else {
+    console.log(`Attempts remaining: ${attempts}`);
+  }
+  
+      
     //cycle through chars array and check
     //if each letter is in the guessedLetters array
     //if not, replace with '_'
@@ -40,8 +58,7 @@ function startGame(letter) {
     //update guessedLetters:   guessedLetters.push(letter);
     //update masked word
     //return masked word
-  }
-  
+
   // TODO:
   // 1️⃣ Build a masked string using underscores for letters not yet guessed.
   // 2️⃣ Track guessed letters and remaining attempts.
